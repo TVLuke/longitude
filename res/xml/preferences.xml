@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:key="pref_sync"
+        android:title="1"
+        android:summary="2"
+        android:defaultValue="true" />
+	<Preference 
+		android:key="pref_key_sms_delete_limit"
+		android:dependency="pref_key_auto_delete"
+		android:summary="1"
+		android:title="tada"/>
+	<Preference 
+		android:key="pref_key_mms_delete_limit"
+		android:dependency="pref_key_auto_delete"
+		android:summary="2"
+		android:title="3"/>
+</PreferenceScreen>

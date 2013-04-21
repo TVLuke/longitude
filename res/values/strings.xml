@@ -7,5 +7,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main_map">MainMap</string>
-
+	<string name="addfriends">Add Friends</string>
+	<string name="basic_settings">Basic Settings</string>
+	<string name="submitlocation_setting">Submit Locations</string>
+	<string name="summary_submitlocation_setting">Submit</string>
+	<string name="setproximitallert">Proximity Allert</string>
+    
 </resources>

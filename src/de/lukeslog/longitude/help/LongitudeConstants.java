@@ -1,4 +1,4 @@
-package de.lukeslog.longitude.constants;
+package de.lukeslog.longitude.help;
 
 public class LongitudeConstants {
 

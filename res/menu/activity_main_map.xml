@@ -1,6 +1,34 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_settings"
+    
+    	<item android:id="@+id/stop_previous"
+	    android:icon="@drawable/ic_action_arrow_left"
+	    android:showAsAction="always"
+	    android:title="@string/addfriends" />
+	    
+	    <item android:id="@+id/stop_next"
+	    android:icon="@drawable/ic_action_arrow_right"
+	    android:showAsAction="always"
+	    android:title="@string/addfriends" />
+    	
+    	<item android:id="@+id/list_friends"
+	    android:icon="@drawable/ic_action_list_2"
+	    android:showAsAction="always"
+	    android:title="@string/addfriends" />
+    	    
+	    <item android:id="@+id/add_friends"
+	    android:icon="@drawable/ic_action_add"
+	    android:showAsAction="always"
+	    android:title="@string/addfriends" />
+	    
+	    <item android:id="@+id/add_proximity_allert"
+	    android:icon="@drawable/ic_action_alarm"
+	    android:showAsAction="ifRoom"
+	    android:title="@string/setproximitallert" />
+	      
+	    <item android:id="@+id/menu_settings"
         android:title="@string/menu_settings"
         android:orderInCategory="100"
-        android:showAsAction="never" />
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_settings" />
+
 </menu>

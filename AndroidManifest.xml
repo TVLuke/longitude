@@ -23,14 +23,21 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="de.lukeslog.longitude.usierinterface.MainMap"
-            android:label="@string/app_name" >
+            android:name="de.lukeslog.longitude.userinterface.MainMap"
+            android:label="@string/app_name"
+            android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="de.lukeslog.longitude.userinterface.PreferenceWithHeaders"
+            android:label="@string/app_name">
+            
+        </activity>
+            
         <receiver android:name="de.lukeslog.longitude.sensing.StartUpReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -42,7 +49,17 @@
 		        <action android:name="de.lukeslog.longitude.sensing.LocationSensing" />
 			</intent-filter>
 		</service>
-		
+		<service android:name="de.lukeslog.longitude.sensing.Broadcaster">
+			<intent-filter>
+		        <action android:name="de.lukeslog.longitude.sensing.Broadcaster" />
+			</intent-filter>
+		</service>
+		<service android:name="de.lukeslog.longitude.sharing.XMPPWrapper">
+			<intent-filter>
+		        <action android:name="de.lukeslog.longitude.sharing.XMPPWrapper" />
+			</intent-filter>
+		</service>
+		<service android:name="de.lukeslog.longitude.help.StartUpService"></service>
 		<meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyDerHiQlmy9Jk8JVWm37cdc1UxoEGXq3Aw"/>

@@ -13,7 +13,7 @@
  */
 package de.lukeslog.longitude.database;
 
-import de.lukeslog.longitude.constants.LongitudeConstants;
+import de.lukeslog.longitude.help.LongitudeConstants;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -160,5 +160,11 @@ public class LocationDatabase
                     onCreate(db);
             }
     }
+
+	public Cursor getLocationHistoryFromUser(String username) 
+	{
+		return db.rawQuery("SELECT * FROM " + TABLE_USER_LOCATION +" WHERE "+TABLE_USER_LOCATIOn_ROW_USER_ID+"='"+username+"';", null);
+		
+	}
 	
 }

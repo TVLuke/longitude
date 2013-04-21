@@ -1,0 +1,33 @@
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="Sending">
+
+        <CheckBoxPreference
+                android:key="checkbox_preference"
+                android:title="Send Locations"
+                android:summary="Send" />
+
+		<ListPreference
+                android:key="list_accuracy"
+                android:title="Accuracy"
+                android:summary="Accuracy"
+                android:entries="@array/listLocationAccuracy"
+                android:entryValues="@array/listLocationAccuracy_values"
+                android:dialogTitle="Choose Accuracy" />
+		
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:title="Username">
+
+        <EditTextPreference
+                android:key="edittext_username"
+                android:title="Username"
+                android:summary="Username"
+                android:dialogTitle="Username" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

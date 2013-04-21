@@ -6,8 +6,12 @@ package de.lukeslog.longitude.sensing;
 
 import org.joda.time.DateTime;
 
-import de.lukeslog.longitude.constants.LongitudeConstants;
+import com.google.android.gms.maps.model.LatLng;
+
 import de.lukeslog.longitude.database.LocationDatabase;
+import de.lukeslog.longitude.help.LongitudeConstants;
+import de.lukeslog.longitude.user.User;
+import de.lukeslog.longitude.user.UserManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -81,6 +85,8 @@ public class LocationSensing extends Service
 	{
 		Log.d(TAG, "LocationSensing - onDestroy");
         unregisterListeners();
+        Intent stopUserManager = new Intent(this, UserManager.class);
+        stopService(stopUserManager);
         stopSelf();
         super.onDestroy();
 	}
@@ -138,7 +144,7 @@ public class LocationSensing extends Service
 	                @Override
 	                public void onLocationChanged(Location arg0) 
 	                {
-	                        Log.i(TAG,"gps based location");
+	                        //Log.i(TAG,"gps based location");
 	                        onNewLocation(arg0);    
 	                }
 
@@ -169,7 +175,7 @@ public class LocationSensing extends Service
 	                @Override
 	                public void onLocationChanged(Location arg0) 
 	                {
-	                        Log.i(TAG,"passive based location");
+	                        //Log.i(TAG,"passive based location");
 	                        onNewLocation(arg0);
 	                }
 
@@ -198,7 +204,7 @@ public class LocationSensing extends Service
 	                @Override
 	                public void onLocationChanged(Location arg0) 
 	                {
-	                        Log.i(TAG,"network based location");
+	                        //Log.i(TAG,"network based location");
 	                        onNewLocation(arg0);
 	                }
 
@@ -225,12 +231,12 @@ public class LocationSensing extends Service
 	{
 		if(!hasGoodAccuracy(location))
 		{
-			Log.i(TAG, "location not good enough.");
+			//Log.i(TAG, "location not good enough.");
 			return;
 		} 
 		else 
 		{
-			Log.d(TAG, "New accurate location recieved");
+			//Log.d(TAG, "New accurate location recieved");
 		}
 		DateTime dt = new DateTime();
 		if (lasttime == null)
@@ -241,15 +247,15 @@ public class LocationSensing extends Service
 		float distance = location.distanceTo(lastlocation);
         float timepassed = (float)( dt.getMillis()-lasttime.getMillis() ) / 1000.0f;
     	float speedsum=0.0f;        
-        Log.d(TAG,"distance is: "+distance);
-        Log.d(TAG,"timepassed is: "+timepassed);
+        //Log.d(TAG,"distance is: "+distance);
+        //Log.d(TAG,"timepassed is: "+timepassed);
         //only if speed calculation is useful
         if (distance > 1 && timepassed > 1) 
         {
         	float speed = distance/timepassed;
         	// convert to km/h
         	speed=speed*3.6f;
-        	Log.d(TAG,"speed is: "+speed);
+        	//Log.d(TAG,"speed is: "+speed);
                 
         	// move SpeedArray up
         	for(int i=0; i<speedarray.length-1; i++)
@@ -266,12 +272,22 @@ public class LocationSensing extends Service
         	speedsum=speedsum/(float)LongitudeConstants.LOCATION_SPEEDARRAY_SIZE;
                 
         	//First speed is not useful since first location is not measured
-        	Log.d(TAG,"speedsum is: "+speedsum);
+        	//Log.d(TAG,"speedsum is: "+speedsum);
 	    }
         //Location and Speed to be put into a database
         LocationDatabase ldb = new LocationDatabase(this);
         int speed = (int) speedsum;
-        ldb.addRow(dt.getMillis(), "tvluke", location.getLatitude(), location.getLongitude(),location.getAltitude(), (int)location.getAccuracy(), speed, " ", 0);
+        prefs = getSharedPreferences(PREFS, 0);
+        String uid= prefs.getString("edittext_username", "");
+        if(!(uid.equals("")))
+        {
+        	Log.d(TAG, "LocationSensing sagt es gibt einer UID und die ist "+uid);
+        	ldb.addRow(dt.getMillis(), uid, location.getLatitude(), location.getLongitude(),location.getAltitude(), (int)location.getAccuracy(), speed, " ", 0);
+        }
+        else
+        {
+        	Log.d(TAG, "nope, no uid");
+        }
 	}
 
 	    
